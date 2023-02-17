@@ -1,10 +1,13 @@
 type Props = {
+  className?: string
   children: string
 }
 
-const HText = ({ children }: Props) => {
+const HText = ({ className, children }: Props) => {
   return (
-    <h1 className="basis-3/5 font-montserrat text-4xl font-bold text-primary-300">
+    <h1
+      className={`basis-3/5 font-montserrat font-bold text-primary-300 ${className}`}
+    >
       {children}
     </h1>
   )

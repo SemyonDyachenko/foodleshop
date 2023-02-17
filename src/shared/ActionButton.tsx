@@ -4,14 +4,15 @@ import { SelectedPage } from "./types"
 type Props = {
   setSelectedPage: (value: SelectedPage) => void
   children: React.ReactNode
-  className: string
+  className?: string
 }
 
 const ActionButton = ({ setSelectedPage, className, children }: Props) => {
   return (
     <AnchorLink
       onClick={() => setSelectedPage(SelectedPage.Home)}
-      className={`cursor-pointer rounded-3xl border border-primary-300 px-10 py-2 transition-all hover:bg-primary-300 hover:text-white ${className}`}
+      href={"#"}
+      className={`rounded-md bg-secondary-500 px-10 py-2 hover:bg-primary-500 hover:text-white ${className}`}
     >
       {children}
     </AnchorLink>
