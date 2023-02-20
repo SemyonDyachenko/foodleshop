@@ -1,6 +1,6 @@
 type Props = {
   className?: string
-  children: string
+  children: React.ReactNode
 }
 
 const HText = ({ className, children }: Props) => {
