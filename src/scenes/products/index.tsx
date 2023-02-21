@@ -39,7 +39,7 @@ const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
       <div className="w-full gap-8">
         <div className="flex items-center justify-between">
           <div className="w-1/3">
-            <div className="p-15">
+            <div className="p-18">
               <img alt="humburger" src={HumburgerImage} />
             </div>
             <div className="flex justify-center text-2xl font-bold text-gray-600">
@@ -50,7 +50,7 @@ const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
             </div>
           </div>
           <div className="w-1/3">
-            <div className="p-15">
+            <div className="p-18">
               <img alt="humburger" src={PizzaImage} />
             </div>
             <div className="flex justify-center text-2xl font-bold text-gray-600">
@@ -61,7 +61,7 @@ const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
             </div>
           </div>
           <div className="w-1/3">
-            <div className="p-15">
+            <div className="p-18">
               <img alt="humburger" src={HumburgerImage} />
             </div>
             <div className="flex justify-center text-2xl font-bold text-gray-600">

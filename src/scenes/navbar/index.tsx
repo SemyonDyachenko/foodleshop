@@ -55,7 +55,12 @@ const Navbar = ({
                 />
               </div>
               <div className={`${flexBetween} gap-8`}>
-                <p className="text-md text-primary-300">Sign in</p>
+                <ActionButton
+                  className="bg-transparent  px-4 text-primary-300 transition-all"
+                  setSelectedPage={setSelectedPage}
+                >
+                  <p className="text-md">Sign in</p>
+                </ActionButton>
                 <ActionButton
                   className="text-md text-black transition-all"
                   setSelectedPage={setSelectedPage}

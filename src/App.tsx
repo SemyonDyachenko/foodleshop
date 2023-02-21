@@ -3,6 +3,8 @@ import Navbar from "@/scenes/navbar"
 import { LangType, SelectedPage } from "@/shared/types"
 import Home from "@/scenes/home"
 import Products from "./scenes/products"
+import Discounts from "./scenes/discounts"
+import Footer from "./scenes/footer"
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -37,6 +39,16 @@ function App() {
         setSelectedPage={setSelectedPage}
       />
       <Products
+        lang={LangType.ENG}
+        selectedPage={selectedPage}
+        setSelectedPage={setSelectedPage}
+      />
+      <Discounts
+        lang={LangType.ENG}
+        selectedPage={selectedPage}
+        setSelectedPage={setSelectedPage}
+      />
+      <Footer
         lang={LangType.ENG}
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
