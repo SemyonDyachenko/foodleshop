@@ -1,6 +1,8 @@
 import ActionButton from "@/shared/ActionButton"
-import { LangType, SelectedPage } from "@/shared/types"
+import { AuthLinkType, LangType, SelectedPage } from "@/shared/types"
+import AuthWidget from "@/widgets/auth"
 import Link from "./Link"
+import { useState, useEffect, useRef } from "react"
 
 type Props = {
   lang: LangType
@@ -17,6 +19,34 @@ const Navbar = ({
 }: Props) => {
   const flexBetween = "flex items-center justify-between"
   const navbarStyles = isTopOfPage ? "" : "bg-primary-100"
+  const [onAuth, setOnAuth] = useState(false)
+  const [authWidgetMode, setAuthWidgetMdode] = useState(AuthLinkType.SIGNIN)
+  const signinBtnRef = useRef<HTMLButtonElement>(null)
+  const signupBtnRef = useRef<HTMLButtonElement>(null)
+  const authWidgetRef = useRef<HTMLDivElement>(null)
+
+  const ChangeAuthWidgetState = (linkType: AuthLinkType) => {
+    setAuthWidgetMdode(linkType)
+    setOnAuth(!onAuth)
+  }
+
+  useEffect(() => {
+    const closeAuthWidget = (e: MouseEvent) => {
+      if (
+        e.composedPath()[0] !== signinBtnRef.current &&
+        e.composedPath()[0] !== signupBtnRef.current
+      ) {
+        if (!authWidgetRef.current?.contains(e.target as Node)) {
+          setOnAuth(false)
+        }
+      }
+    }
+
+    document.body.addEventListener("click", closeAuthWidget)
+    return () =>
+      document.body.removeEventListener("click", () => closeAuthWidget)
+  }, [])
+
   return (
     <nav>
       <div
@@ -56,18 +86,28 @@ const Navbar = ({
               </div>
               <div className={`${flexBetween} gap-8`}>
                 <ActionButton
-                  className="bg-transparent  px-4 text-primary-300 transition-all"
+                  ref={signinBtnRef}
+                  onClick={() => ChangeAuthWidgetState(AuthLinkType.SIGNIN)}
+                  className="text-md bg-transparent px-4 text-primary-300 transition-all"
                   setSelectedPage={setSelectedPage}
                 >
-                  <p className="text-md">Sign in</p>
+                  Sign In
                 </ActionButton>
+
                 <ActionButton
+                  ref={signupBtnRef}
+                  onClick={() => ChangeAuthWidgetState(AuthLinkType.SIGNUP)}
                   className="text-md text-black transition-all"
                   setSelectedPage={setSelectedPage}
                 >
                   Sign Up
                 </ActionButton>
               </div>
+              <AuthWidget
+                opened={onAuth}
+                ref={authWidgetRef}
+                sourceLinkType={authWidgetMode}
+              />
             </div>
           </div>
         </div>

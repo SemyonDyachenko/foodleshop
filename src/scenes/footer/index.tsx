@@ -40,7 +40,11 @@ const Footer = ({ lang, selectedPage, setSelectedPage }: Props) => {
             <HText className="text-4xl">Follow Us On</HText>
             <div className="text-md my-8 flex gap-4 text-gray-400">
               {icons.map((element) => (
-                <SocialIcon className="p-26 text-gray-400" network={element} />
+                <SocialIcon
+                  key={element}
+                  className="p-26 text-gray-400"
+                  network={element}
+                />
               ))}
             </div>
           </div>
@@ -52,7 +56,9 @@ const Footer = ({ lang, selectedPage, setSelectedPage }: Props) => {
           </div>
           <div className="py-6">
             {menuButtons.map((element) => (
-              <div className="pb-4 text-lg text-gray-400">{element}</div>
+              <div key={element} className="pb-4 text-lg text-gray-400">
+                {element}
+              </div>
             ))}
           </div>
         </div>
@@ -62,7 +68,9 @@ const Footer = ({ lang, selectedPage, setSelectedPage }: Props) => {
           </div>
           <div className="py-6">
             {informationButtons.map((element) => (
-              <div className="pb-4 text-lg text-gray-400">{element}</div>
+              <div key={element} className="pb-4 text-lg text-gray-400">
+                {element}
+              </div>
             ))}
           </div>
         </div>
@@ -72,7 +80,9 @@ const Footer = ({ lang, selectedPage, setSelectedPage }: Props) => {
           </div>
           <div className="py-6">
             {contanctButtons.map((element) => (
-              <div className="pb-4 text-lg text-gray-400">{element}</div>
+              <div key={element} className="pb-4 text-lg text-gray-400">
+                {element}
+              </div>
             ))}
           </div>
         </div>

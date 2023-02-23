@@ -26,7 +26,7 @@ const ProductCard = ({ setSelectedPage }: Props) => {
           <div className="flex items-center gap-2 py-2">
             <div className="flex gap-1">
               {new Array(0, 1, 2, 3, 4).map((element) => (
-                <StarIcon className="w-5 text-secondary-500" />
+                <StarIcon key={element} className="w-5 text-secondary-500" />
               ))}
             </div>
             <div className="text-gray-400">{"(160)"}</div>

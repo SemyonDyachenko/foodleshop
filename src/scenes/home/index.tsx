@@ -92,6 +92,7 @@ const Home = ({ lang, selectedPage, setSelectedPage }: Props) => {
           <div className="flex h-full items-center gap-8">
             {features.map((card) => (
               <FeatureCard
+                key={card.title}
                 icon={card.icon}
                 title={card.title}
                 description={card.description}

@@ -24,8 +24,8 @@ const Discounts = ({ lang, selectedPage, setSelectedPage }: Props) => {
           </div>
         </div>
         <div className=" flex w-2/5 flex-wrap">
-          <div className="h-[210px] w-full rounded-3xl bg-primary-500"></div>
-          <div className="my-5 h-[210px] w-full rounded-3xl bg-primary-500"></div>
+          <div className="h-[215px] w-full rounded-3xl bg-primary-500"></div>
+          <div className="my-5 h-[215px] w-full rounded-3xl bg-primary-500"></div>
         </div>
       </div>
     </section>
