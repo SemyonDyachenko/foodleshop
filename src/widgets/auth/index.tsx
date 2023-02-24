@@ -1,16 +1,23 @@
 import { AuthLinkType } from "@/shared/types"
 import Input from "@/shared/UI/Input"
+import { isValidEmail } from "@/utils/emailValid"
 import { motion } from "framer-motion"
-import React from "react"
+import React, { useEffect } from "react"
+import { useForm } from "react-hook-form"
 
 type Props = {
   sourceLinkType: AuthLinkType
   opened: boolean
 }
 
+const emailPattern =
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
 const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
   ({ opened, sourceLinkType }, ref) => {
     const visibleStyle = !opened ? "hidden" : ""
+    const inputStyles =
+      "h-[40px] w-[350px] rounded-lg bg-secondary-500 p-4 text-white outline-none placeholder:text-gray-200"
 
     const ChangeAuthType = () => {
       if (sourceLinkType === AuthLinkType.SIGNUP)
@@ -18,6 +25,29 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
       if (sourceLinkType === AuthLinkType.SIGNIN)
         sourceLinkType = AuthLinkType.SIGNUP
     }
+
+    const {
+      register,
+      formState: { errors, isValid },
+      handleSubmit,
+      reset,
+    } = useForm({ mode: "onBlur" })
+
+    const onSubmit = (data: any) => {
+      const { email, password } = data
+      if (
+        email === "semyondyachenko@gmail.com" &&
+        password === "L0nd0nvecter359!"
+      ) {
+        localStorage.setItem("auth", "true")
+        reset()
+      }
+    }
+    useEffect(() => {
+      if (!opened) {
+        reset()
+      }
+    })
 
     return (
       <motion.div
@@ -32,7 +62,7 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
         }}
         className={`${visibleStyle} w-5/7 absolute top-20 right-20 mx-auto rounded-2xl bg-primary-600 drop-shadow-lg`}
       >
-        <div className="p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-8">
           <div>
             <div className="flex justify-center text-2xl font-bold text-primary-500">
               Authorization
@@ -42,22 +72,78 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Input title="E-mail" type="email" placeholder="test@info.com" />
-            <Input
-              title="Password"
-              type="password"
-              placeholder="Password more 8-letter"
-            />
+            <div>
+              <div className="text-md py-2 text-gray-400">E-mail</div>
+              <div>
+                <input
+                  className={`${inputStyles}`}
+                  type="text"
+                  placeholder="info@app.com"
+                  {...register("email", {
+                    required: "Email field is required",
+                    pattern: {
+                      value: emailPattern,
+                      message: "Email example: info@app.com",
+                    },
+                  })}
+                />
+              </div>
+              <div
+                className={`${
+                  !errors?.email && "hidden"
+                } h-[30px] py-2 text-sm text-primary-500`}
+              >
+                {errors?.email && (
+                  <p>{errors?.email?.message?.toString() || "Error"}</p>
+                )}
+              </div>
+            </div>
+            <div>
+              <div className="text-md py-2 text-gray-400">Password</div>
+              <div>
+                <input
+                  className={`${inputStyles}`}
+                  type="password"
+                  placeholder="Enter password"
+                  {...register("password", {
+                    required: "Password field is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password need more 8-letters",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,40}$/,
+                      message:
+                        "The password must contain one uppercase, number and symbol",
+                    },
+                  })}
+                />
+              </div>
+              <div
+                className={`${
+                  !errors?.password && "hidden"
+                }   max-w-[350px] py-4 text-sm text-primary-500`}
+              >
+                {errors?.password && (
+                  <p>
+                    {errors?.password?.message?.toString() || "Password error"}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
           <div className="flex w-full justify-between pt-8 pb-4">
             <div>
-              <button className="rounded-full bg-primary-400 px-12 py-4 text-white transition-all hover:bg-primary-500">
+              <button
+                disabled={!isValid}
+                className="rounded-full bg-primary-400 px-12 py-4 text-white transition-all hover:bg-primary-500 disabled:bg-primary-200"
+              >
                 {sourceLinkType === AuthLinkType.SIGNIN ? "Sign In" : "Sign Up"}
               </button>
             </div>
             <div className="text-right">
               <div className="text-sm text-gray-400">
-                {" "}
                 {sourceLinkType === AuthLinkType.SIGNIN
                   ? "Have not a account ?"
                   : "Already have a account?"}
@@ -71,7 +157,7 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
               </a>
             </div>
           </div>
-        </div>
+        </form>
       </motion.div>
     )
   }

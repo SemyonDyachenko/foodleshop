@@ -27,7 +27,7 @@ const contanctButtons = [
 
 const Footer = ({ lang, selectedPage, setSelectedPage }: Props) => {
   return (
-    <section id="footer" className="mt-20 bg-primary-600">
+    <section id="aboutus" className="mt-20 bg-primary-600">
       <div className="pb-2- mx-auto flex w-5/6 items-start justify-between pt-20">
         <div>
           <div>

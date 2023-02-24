@@ -14,7 +14,7 @@ type Props = {
 const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
   return (
     <section
-      id="products"
+      id="menu"
       className="w-full gap-16 bg-back-0 py-10 md:h-full md:pb-0"
     >
       <div className="mx-auto my-10 flex w-5/6 items-center justify-between pt-10">
@@ -74,7 +74,10 @@ const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
         </div>
       </div>
 
-      <div className="mx-auto my-10 flex w-5/6 items-center justify-between pt-10">
+      <div
+        id="menuitems"
+        className="mx-auto my-10 flex w-5/6 items-center justify-between pt-10"
+      >
         <div>
           <div>
             <HText className="text-5xl text-gray-600">
@@ -103,7 +106,7 @@ const Products = ({ lang, selectedPage, setSelectedPage }: Props) => {
         </div>
       </div>
 
-      <div className=" mx-auto flex w-5/6 flex-wrap justify-between gap-0 py-20">
+      <div className=" mx-auto flex w-5/6 flex-wrap justify-between gap-0 pt-20 pb-5">
         <ProductCard setSelectedPage={setSelectedPage} />
         <ProductCard setSelectedPage={setSelectedPage} />
         <ProductCard setSelectedPage={setSelectedPage} />

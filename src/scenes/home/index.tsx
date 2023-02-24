@@ -10,6 +10,7 @@ import {
   CreditCardIcon,
 } from "@heroicons/react/24/outline"
 import FeatureCard from "./FeatureCard"
+import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const features = [
   {
@@ -60,14 +61,16 @@ const Home = ({ lang, selectedPage, setSelectedPage }: Props) => {
                 </p>
               </div>
               <div className="itmes-center flex gap-4 py-4">
-                <div className="flex h-[55px] w-[180px] items-center rounded-full  bg-primary-500">
-                  <div className="item-center mx-1.5 flex h-[45px] w-[45px] justify-center rounded-full bg-secondary-400">
-                    <ShoppingBagIcon className="p-3 text-sm text-gray-600" />
+                <AnchorLink href="#menuitems">
+                  <div className="flex h-[55px] w-[180px] items-center rounded-full  bg-primary-400 transition-all hover:bg-primary-500">
+                    <div className="item-center mx-1.5 flex h-[45px] w-[45px] justify-center rounded-full bg-secondary-400">
+                      <ShoppingBagIcon className="p-3 text-sm text-gray-600" />
+                    </div>
+                    <div className="text-md px-2 font-bold text-white">
+                      Buy Now
+                    </div>
                   </div>
-                  <div className="text-md px-2 font-bold text-white">
-                    Buy Now
-                  </div>
-                </div>
+                </AnchorLink>
 
                 <div className="flex items-center gap-3">
                   <div className=" mx-1.5 flex h-[55px] w-[55px] -rotate-45 items-center justify-center rounded-full  border-4 border-primary-500 border-b-transparent border-r-transparent bg-white">
@@ -87,7 +90,7 @@ const Home = ({ lang, selectedPage, setSelectedPage }: Props) => {
           </div>
         </div>
       </section>
-      <div className="">
+      <div id="service" className="">
         <div className="mx-auto mt-[-120px] h-[200px] w-4/5 rounded-3xl bg-white p-8 drop-shadow-md">
           <div className="flex h-full items-center gap-8">
             {features.map((card) => (

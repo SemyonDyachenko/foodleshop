@@ -9,8 +9,11 @@ type Props = {
 
 const Discounts = ({ lang, selectedPage, setSelectedPage }: Props) => {
   return (
-    <section id="discounts w-full gap-16 bg-back-0 py-10 md:h-full md:pb-0">
-      <div className="mx-auto flex w-5/6  justify-between">
+    <section
+      id="offer"
+      className=" w-full gap-4 bg-back-0 py-0 md:h-full md:pb-0"
+    >
+      <div className="mx-auto flex w-5/6 justify-between">
         <div className="w-3/5">
           <div className="w-90 flex h-[450x] opacity-90">
             <img
