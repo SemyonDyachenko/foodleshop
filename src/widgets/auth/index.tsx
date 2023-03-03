@@ -1,6 +1,6 @@
 import { AuthLinkType } from "@/shared/types"
 import Input from "@/shared/UI/Input"
-import { isValidEmail } from "@/utils/emailValid"
+import { emailPattern } from "@/utils/emailValid"
 import { motion } from "framer-motion"
 import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
@@ -9,9 +9,6 @@ type Props = {
   sourceLinkType: AuthLinkType
   opened: boolean
 }
-
-const emailPattern =
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
   ({ opened, sourceLinkType }, ref) => {
@@ -39,15 +36,16 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
         email === "semyondyachenko@gmail.com" &&
         password === "L0nd0nvecter359!"
       ) {
-        localStorage.setItem("auth", "true")
+        localStorage.setItem("auth", email)
         reset()
+        location.reload()
       }
     }
     useEffect(() => {
       if (!opened) {
         reset()
       }
-    })
+    }, [])
 
     return (
       <motion.div
@@ -136,6 +134,7 @@ const AuthWidget = React.forwardRef<HTMLDivElement, Props>(
           <div className="flex w-full justify-between pt-8 pb-4">
             <div>
               <button
+                type="submit"
                 disabled={!isValid}
                 className="rounded-full bg-primary-400 px-12 py-4 text-white transition-all hover:bg-primary-500 disabled:bg-primary-200"
               >

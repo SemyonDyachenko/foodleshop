@@ -3,7 +3,7 @@ export enum SelectedPage {
 }
 
 export enum LangType {
-  ENG = "ENG",
+  lang = "ENG",
   RUS = "RUS",
 }
 
